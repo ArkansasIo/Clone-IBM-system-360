@@ -43,6 +43,7 @@ add_library(ibmfortran STATIC
     src/fortran/format_descriptor.cpp
     src/fortran/expression.cpp
     src/fortran/array.cpp
+    src/fortran/parser.cpp
 )
 add_library(ibmlegacy::fortran ALIAS ibmfortran)
 target_include_directories(ibmfortran PUBLIC include)
