@@ -1,0 +1,6 @@
+{
+  "declarations": ["INTEGER", "REAL", "DOUBLE PRECISION", "LOGICAL", "DIMENSION", "COMMON", "EQUIVALENCE", "DATA", "EXTERNAL", "INTRINSIC"],
+  "executable": ["ASSIGN", "CALL", "CONTINUE", "DO", "GOTO", "GO TO", "IF", "PAUSE", "PRINT", "READ", "RETURN", "STOP", "WRITE"],
+  "program_units": ["PROGRAM", "FUNCTION", "SUBROUTINE", "BLOCK DATA", "END"],
+  "note": "Inventory for project planning; parser support is incomplete."
+}
