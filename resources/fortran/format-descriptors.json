@@ -1,0 +1,5 @@
+{
+  "supported_by_initial_parser": ["I", "F", "E", "D", "A", "/", "X"],
+  "planned": ["G", "L", "P", "T", "TL", "TR", "BN", "BZ", "SP", "SS", "S", "H"],
+  "note": "FORMAT parser is intentionally partial and currently handles simple descriptors only."
+}
