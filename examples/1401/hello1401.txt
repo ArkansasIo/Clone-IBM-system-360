@@ -1,0 +1,3 @@
+IBM 1401 sample input
+This file is a plain text fixture for card/tape experiments.
+No machine code is implied.
