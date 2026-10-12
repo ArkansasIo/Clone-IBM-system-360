@@ -1,0 +1,7 @@
+#include "ibmlegacy/machines/ibm1401.hpp"
+#include "ibmlegacy/machines/system360.hpp"
+#include "ibmlegacy/tape/tape_image.hpp"
+#include <iostream>
+#include <string>
+using namespace ibmlegacy;
+int main(int argc,char**argv){try{if(argc<2||std::string(argv[1])=="--help"){std::cout<<"IBM Legacy Virtual Hardware Lab\nCommands: memory-demo | tape-demo <file> | inspect-tape <file>\n";return 0;}std::string cmd=argv[1];if(cmd=="memory-demo"){machines::IBM1401Memory m(4000);m.load_ascii(100,"HELLO FROM IBM 1401");std::cout<<m.dump_ascii(100,19)<<'\n';machines::System360Storage s(65536);s.write_word(0,0xC1C2C3C4U);std::cout<<"System/360 word: 0x"<<std::hex<<s.read_word(0)<<'\n';}else if(cmd=="tape-demo"&&argc==3){tape::TapeImage t;t.append_record({'I','B','M','1','4','0','1'});t.append_record({'S','Y','S','T','E','M','/','3','6','0'});t.append_tape_mark();t.save(argv[2]);std::cout<<"Created tape image\n";}else if(cmd=="inspect-tape"&&argc==3){auto t=tape::TapeImage::load(argv[2]);for(std::size_t i=0;i<t.records().size();++i){auto&r=t.records()[i];std::cout<<i<<": ";if(r.tape_mark)std::cout<<"<TAPE MARK>";else for(auto b:r.bytes)std::cout<<static_cast<char>(b);std::cout<<'\n';}}else{std::cerr<<"Invalid command; use --help\n";return 2;}}catch(const std::exception&e){std::cerr<<e.what()<<'\n';return 1;}return 0;}
