@@ -15,5 +15,7 @@ jobs:
         run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug
       - name: Build
         run: cmake --build build --parallel 2
+      - name: Validate FORTRAN resources
+        run: python3 scripts/validate_fortran_resources.py
       - name: Test
         run: ctest --test-dir build --output-on-failure
