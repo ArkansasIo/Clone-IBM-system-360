@@ -13,6 +13,7 @@ add_library(ibmlegacy
     src/devices/line_printer.cpp
     src/devices/channel.cpp
     src/runtime_config.cpp
+    src/hex_loader.cpp
     src/cpu/system360_cpu.cpp
     src/cpu/ibm1401_cpu.cpp
     src/fortran/fortran_compiler.cpp
