@@ -8,7 +8,9 @@ add_library(ibmlegacy
     src/machines/ibm1401.cpp
     src/machines/system360.cpp
     src/machines/ebcdic.cpp
+    src/machine_profiles.cpp
     src/devices/tape_drive.cpp
+    src/devices/tape_models.cpp
     src/devices/card_deck.cpp
     src/devices/line_printer.cpp
     src/devices/channel.cpp
