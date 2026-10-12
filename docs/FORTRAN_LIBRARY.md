@@ -13,7 +13,7 @@ The public headers under `include/ibmlegacy/fortran` provide the current library
 - `runtime_io.hpp`, `runtime_math.hpp`: simple runtime I/O and mathematical helpers.
 - `fortran_compiler.hpp`: limited source translation API.
 
-The `resources/fortran` directory contains JSON dialect inventories, sample programs, input fixtures and an illustrative include file. The resource files document the project subset; they are not a complete compiler specification.
+The `resources/fortran` directory contains JSON dialect inventories, a manifest, sample programs with expected-output fixtures, input fixtures, an illustrative include file, and runtime resource inventories. The resource files document the project subset; they are not a complete compiler specification.
 
 ## Deliberate limitations
 This library is not yet a full FORTRAN IV/H compiler. It lacks a complete statement parser, label/control-flow lowering, arrays, implied DO, COMMON/EQUIVALENCE/DATA semantics, subprogram calling conventions, full formatted I/O, and IBM object-deck output. Validate future semantics against the selected historical language reference and System/360 compiler manuals.
