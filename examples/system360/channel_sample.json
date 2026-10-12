@@ -1,0 +1,8 @@
+{
+  "description": "Illustrative virtual I/O setup; not a hardware-accurate device address map.",
+  "machine": "System/360",
+  "tape_unit": "IBM 2401 profile",
+  "channel": 0,
+  "device_address": "180",
+  "notes": ["Choose a specific machine model before implementing real I/O semantics."]
+}
