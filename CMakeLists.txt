@@ -1,0 +1,33 @@
+cmake_minimum_required(VERSION 3.25)
+project(IBM_Legacy_Virtual_Hardware VERSION 0.1.0 LANGUAGES CXX)
+set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+add_library(ibmlegacy
+    src/tape/tape_image.cpp
+    src/machines/ibm1401.cpp
+    src/machines/system360.cpp
+    src/devices/tape_drive.cpp
+    src/devices/card_deck.cpp
+    src/devices/line_printer.cpp
+    src/runtime_config.cpp
+    src/cpu/system360_cpu.cpp
+    src/cpu/ibm1401_cpu.cpp
+    src/fortran/fortran_compiler.cpp
+)
+target_include_directories(ibmlegacy PUBLIC include)
+if(MSVC)
+  target_compile_options(ibmlegacy PRIVATE /W4 /permissive-)
+else()
+  target_compile_options(ibmlegacy PRIVATE -Wall -Wextra -Wpedantic -Wconversion)
+endif()
+add_executable(ibm-legacy src/main.cpp)
+target_link_libraries(ibm-legacy PRIVATE ibmlegacy)
+add_executable(ibm-fortran src/fortran_main.cpp)
+target_link_libraries(ibm-fortran PRIVATE ibmlegacy)
+include(CTest)
+if(BUILD_TESTING)
+  add_executable(ibmlegacy-tests tests/test_main.cpp)
+  target_link_libraries(ibmlegacy-tests PRIVATE ibmlegacy)
+  add_test(NAME ibmlegacy-tests COMMAND ibmlegacy-tests)
+endif()
