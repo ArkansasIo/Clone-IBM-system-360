@@ -1,0 +1,8 @@
+{
+  "device_family": "IBM 729",
+  "model_profile": "Model IV illustrative",
+  "record_backend": "virtual-tape-image",
+  "density_profile_cpi": 556,
+  "write_protected": false,
+  "limitations": ["Configuration scaffold only", "No verified model-specific command set"]
+}
