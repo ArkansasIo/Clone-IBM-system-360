@@ -1,11 +1,17 @@
 # Repository layout
 
-- include/ibmlegacy: public headers for CPU, device, FORTRAN, machine, runtime and tape modules
-- src: C++23 implementations and command-line applications
-- config: descriptive JSON machine profiles
-- docs: architecture, research, hardware, testing, roadmap and CPU/FORTRAN status
-- examples/system360/fortran: fixed-form FORTRAN sample programs
-- tests: unit tests
-- scripts: Windows PowerShell and POSIX shell build helpers
+- `include/ibmlegacy/assembler`: assembler line model, lexer and RR encoder APIs
+- `include/ibmlegacy/cpu`: CPU result, System/360 CPU/ALU/decoder/opcodes and IBM 1401 CPU interface
+- `include/ibmlegacy/devices`: device interface/bus, tape drives, channel queue, card/printer wrappers
+- `include/ibmlegacy/fortran`: FORTRAN compiler prototype and fixed-form source reader
+- `include/ibmlegacy/machines`: IBM 1401 and System/360 memory models, EBCDIC and profile metadata
+- `include/ibmlegacy/runtime`: machine profiles, hex/binary loaders, trace logger
+- `include/ibmlegacy/tape`: virtual tape-image interface
+- `src`: C++23 implementations and command-line entry points
+- `config`: descriptive machine/device profiles
+- `docs`: architecture, research, subsystem status, and limitations
+- `examples`: assembler, FORTRAN and device fixtures
+- `tests`: regression tests
+- `.github/workflows`: build and test workflow
 
-The project is incremental. Full historical instruction-set and device compatibility are not claimed.
+This is a growing educational project; a present file or profile does not imply complete historical hardware compatibility.
