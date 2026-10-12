@@ -16,17 +16,21 @@ Requires CMake 3.25+ and a C++23 compiler.
 ```sh
 cmake -S . -B build
 cmake --build build
-ctest --test-dir build --output-on-failure
+ctest --test-dir build -C Debug --output-on-failure
 ```
+
+> With a single-config generator (Makefiles, Ninja) drop the `-C Debug` flag.
+> With a multi-config generator (Visual Studio, Xcode) pass `--config Debug` to
+> `cmake --build` and `-C Debug` to `ctest`.
 
 ## Examples
 ```sh
-./build/ibm-legacy --help
-./build/ibm-legacy memory-demo
-./build/ibm-legacy tape-demo demo.vmt
-./build/ibm-legacy inspect-tape demo.vmt
-./build/ibm-fortran --help
-./build/ibm-as examples/system360/rr_subset.asm rr_subset.bin
+./build/Debug/ibm-legacy --help
+./build/Debug/ibm-legacy memory-demo
+./build/Debug/ibm-legacy tape-demo demo.vmt
+./build/Debug/ibm-legacy inspect-tape demo.vmt
+./build/Debug/ibm-fortran --help
+./build/Debug/ibm-as examples/system360/rr_subset.asm rr_subset.bin
 ```
 
 ## FORTRAN library
