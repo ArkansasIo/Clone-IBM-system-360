@@ -1,0 +1,5 @@
+# RR-format sample bytes for the educational CPU subset.
+# LR  R1,R2 = 18 12
+18 12
+# AR  R1,R2 = 1A 12
+1A 12
