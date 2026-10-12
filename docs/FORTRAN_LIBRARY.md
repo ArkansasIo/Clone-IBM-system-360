@@ -11,7 +11,7 @@ The public headers under `include/ibmlegacy/fortran` provide the current library
 - `intrinsics.hpp`: initial intrinsic-function evaluation helpers.
 - `format_descriptor.hpp`: partial FORMAT descriptor parser.
 - `runtime_io.hpp`, `runtime_math.hpp`: simple runtime I/O and mathematical helpers.
-- `fortran_compiler.hpp`: limited source translation API.
+- `ast.hpp`, `parser.hpp`: statement-kind AST and fixed-form statement classification parser.\n- `fortran_compiler.hpp`: limited source translation API.
 
 The `resources/fortran` directory contains JSON dialect inventories, a manifest, sample programs with expected-output fixtures, input fixtures, an illustrative include file, and runtime resource inventories. The resource files document the project subset; they are not a complete compiler specification.
 
