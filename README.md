@@ -1,13 +1,15 @@
-# IBM System/360 Virtual Hardware Lab
+# IBM 1401 / IBM 729 and System/360 / IBM 2400 Virtual Hardware Lab
 
-Independent C++23 emulator research project for historically informed IBM 1401/729 and System/360/2400 virtual hardware, with an initial FORTRAN subset tool.
+An independent C++23 research and educational codebase for experimenting with early IBM business-computing hardware families.
 
-## Status
-
-This is an incremental educational implementation, not a complete or bit-compatible IBM emulator and not IBM's original source code. Current components include virtual tape images and drive, card-deck and line-printer models, 1401 character storage, System/360 byte storage/registers, a small System/360 register-instruction subset, and an experimental fixed-form FORTRAN reader/translator.
+## Hardware families
+- **IBM 1401:** character-addressed memory and word-mark representation, a preliminary CPU interface, and card/printer utilities.
+- **IBM 729:** virtual tape-image format, record/tape-mark navigation, and named drive configuration profiles.
+- **IBM System/360:** byte-addressed storage, general registers, a small RR instruction subset, opcode metadata, and an educational channel-command queue.
+- **IBM 2400 family:** named 2400-family tape unit/control-unit profiles using the generic virtual tape backend.
+- **FORTRAN subset tooling:** experimental fixed-form source reader/translator with illustrative assembly listing output.
 
 ## Build
-
 Requires CMake 3.25+ and a C++23 compiler.
 
 ```sh
@@ -17,22 +19,15 @@ ctest --test-dir build --output-on-failure
 ```
 
 ## Commands
-
 ```sh
 ./build/ibm-legacy --help
 ./build/ibm-legacy memory-demo
 ./build/ibm-legacy tape-demo demo.vmt
 ./build/ibm-legacy inspect-tape demo.vmt
 ./build/ibm-fortran --emit-c examples/system360/fortran/arithmetic.f arithmetic.cpp
-./build/ibm-fortran --emit-s360 examples/system360/fortran/arithmetic.f arithmetic.s360.asm
 ```
 
-The FORTRAN compiler is a prototype. Its generated System/360 assembly is an illustrative listing, not an executable object deck. The IBM 1401 CPU decoder and full System/360 instruction set remain future work.
+## Compatibility status
+This is not a complete, bit-compatible emulator and does not contain IBM's original source code. IBM 1401 instruction execution is not implemented. System/360 CPU support currently recognizes only a small RR instruction subset. The named 729/2400 profiles are configuration presets rather than cycle-accurate physical device simulations. FORTRAN translation and generated assembly remain experimental.
 
-## Research references
-
-- IBM 1401 reference manual: https://bitsavers.org/pdf/ibm/1401/A24-1403-5_1401_Reference_Apr62.pdf
-- IBM 729 tape notes: https://ibm1401.computerhistory.org/729-Info.html
-- System/360 Principles of Operation: https://www.eserviceinfo.com/preview_html.php?fileid=79665&previewid=50152
-
-See `docs/` for architecture, hardware, research, roadmap, and FORTRAN support notes.
+Read `docs/MODEL_MATRIX.md`, `docs/IBM1401_729.md`, `docs/SYSTEM360_2400.md`, `docs/ARCHITECTURE.md`, and `docs/RESEARCH_SOURCES.md` before extending the emulator.
