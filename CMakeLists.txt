@@ -13,6 +13,7 @@ add_library(ibmlegacy
     src/devices/device_bus.cpp
     src/devices/ibm1402_reader.cpp
     src/devices/ibm1403_printer.cpp
+    src/devices/ibm2540_reader_punch.cpp
     src/devices/tape_models.cpp
     src/devices/card_deck.cpp
     src/devices/line_printer.cpp
@@ -22,6 +23,7 @@ add_library(ibmlegacy
     src/cpu/system360_cpu.cpp
     src/cpu/system360_alu.cpp
     src/cpu/system360_decoder.cpp
+    src/trace_logger.cpp
     src/cpu/ibm1401_cpu.cpp
     src/fortran/fortran_compiler.cpp
     src/fortran/source_reader.cpp
@@ -38,6 +40,8 @@ add_executable(ibm-legacy src/main.cpp)
 target_link_libraries(ibm-legacy PRIVATE ibmlegacy)
 add_executable(ibm-fortran src/fortran_main.cpp)
 target_link_libraries(ibm-fortran PRIVATE ibmlegacy)
+add_executable(ibm-as src/assembler_main.cpp)
+target_link_libraries(ibm-as PRIVATE ibmlegacy)
 include(CTest)
 if(BUILD_TESTING)
   add_executable(ibmlegacy-tests tests/test_main.cpp)
