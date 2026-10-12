@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <cmath>
 #include <cctype>
+#include <cstdlib>
 namespace ibmlegacy::fortran {
 namespace {double num(const TypedValue&v){if(auto p=std::get_if<double>(&v.value))return *p;if(auto p=std::get_if<long long>(&v.value))return static_cast<double>(*p);if(auto p=std::get_if<bool>(&v.value))return *p?1.0:0.0;return 0.0;}std::string upper(std::string s){for(char&c:s)c=static_cast<char>(std::toupper(static_cast<unsigned char>(c)));return s;}}
 std::optional<TypedValue> evaluate_intrinsic(const std::string&raw,const std::vector<TypedValue>&a,std::string&err){
