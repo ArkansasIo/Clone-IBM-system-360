@@ -1,0 +1,6 @@
+{
+  "source": "hello.f",
+  "expected_stdout": "hello.expected.txt",
+  "purpose": "integer declaration, assignment and list output",
+  "status": "supported-subset fixture; execute only after translator/build verification"
+}
