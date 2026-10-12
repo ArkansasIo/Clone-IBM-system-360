@@ -20,6 +20,7 @@ add_library(ibmlegacy
     src/devices/channel.cpp
     src/runtime_config.cpp
     src/hex_loader.cpp
+    src/binary_loader.cpp
     src/cpu/system360_cpu.cpp
     src/cpu/system360_alu.cpp
     src/cpu/system360_decoder.cpp
