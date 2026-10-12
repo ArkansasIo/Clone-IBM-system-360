@@ -10,6 +10,9 @@ add_library(ibmlegacy
     src/machines/ebcdic.cpp
     src/machine_profiles.cpp
     src/devices/tape_drive.cpp
+    src/devices/device_bus.cpp
+    src/devices/ibm1402_reader.cpp
+    src/devices/ibm1403_printer.cpp
     src/devices/tape_models.cpp
     src/devices/card_deck.cpp
     src/devices/line_printer.cpp
@@ -17,8 +20,13 @@ add_library(ibmlegacy
     src/runtime_config.cpp
     src/hex_loader.cpp
     src/cpu/system360_cpu.cpp
+    src/cpu/system360_alu.cpp
+    src/cpu/system360_decoder.cpp
     src/cpu/ibm1401_cpu.cpp
     src/fortran/fortran_compiler.cpp
+    src/fortran/source_reader.cpp
+    src/assembler/lexer.cpp
+    src/assembler/encoder.cpp
 )
 target_include_directories(ibmlegacy PUBLIC include)
 if(MSVC)
