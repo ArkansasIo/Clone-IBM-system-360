@@ -26,6 +26,7 @@
 #include "ibmlegacy/fortran/format_descriptor.hpp"
 #include "ibmlegacy/fortran/expression.hpp"
 #include "ibmlegacy/fortran/diagnostic.hpp"
+#include "ibmlegacy/fortran/array.hpp"
 #include "ibmlegacy/runtime/trace_logger.hpp"
 #include "ibmlegacy/machines/ibm1401.hpp"
 #include "ibmlegacy/machines/ibm1401_opcodes.hpp"
@@ -60,6 +61,7 @@ int main(){
  assert(fortran::runtime::dsqrt(16.0)==4.0);
  std::ostringstream ioout;std::istringstream ioin("abc 123");fortran::FortranRuntimeIO fio(ioin,ioout);fio.write_record("record");std::string inputRecord;assert(fio.read_record(inputRecord)&&inputRecord=="abc 123");fio.print_list({"A","B"});assert(ioout.str()=="record\\nA B\\n");
  fortran::DiagnosticBag db;db.error({"test.f",4,7},"F0001","bad token");assert(db.has_errors()&&db.format().find("test.f:4:7")!=std::string::npos);
+ fortran::NumericArray1D fa(1,5,fortran::TypeKind::Integer);assert(fa.size()==5&&fa.set(3,7.9)&&fa.get(3).value()==7.0&&!fa.set(0,1));fortran::NumericArray1D badArray(10,2);assert(!badArray.error().empty());
  auto add=cpu::add32(1,2);assert(add.value==3&&add.condition_code==2&&!add.overflow);auto dec=cpu::decode_rr(0x18,0x12);assert(dec.info&&dec.r1==1&&dec.r2==2);
  auto asmline=assembler::parse_assembler_line("LOOP LR R1,R2",1);assert(asmline.success&&asmline.line.label=="LOOP"&&asmline.line.mnemonic=="LR");auto enc=assembler::encode_rr_subset(asmline.line);assert(enc.success&&enc.bytes.size()==2&&enc.bytes[0]==0x18);
  devices::VirtualIBM1402Reader reader;reader.load_deck(deck);auto card=reader.read_card();assert(card&&card->substr(0,5)=="HELLO");assert(reader.cards_remaining()==0);
