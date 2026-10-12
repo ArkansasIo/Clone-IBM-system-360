@@ -27,6 +27,14 @@ add_library(ibmlegacy
     src/trace_logger.cpp
     src/cpu/ibm1401_cpu.cpp
     src/fortran/fortran_compiler.cpp
+    src/fortran/diagnostic.cpp
+    src/fortran/lexer.cpp
+    src/fortran/symbol_table.cpp
+    src/fortran/intrinsics.cpp
+    src/fortran/runtime_io.cpp
+    src/fortran/runtime_math.cpp
+    src/fortran/format_descriptor.cpp
+    src/fortran/expression.cpp
     src/fortran/source_reader.cpp
     src/assembler/lexer.cpp
     src/assembler/encoder.cpp
