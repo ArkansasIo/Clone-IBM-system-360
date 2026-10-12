@@ -7,9 +7,11 @@ add_library(ibmlegacy
     src/tape/tape_image.cpp
     src/machines/ibm1401.cpp
     src/machines/system360.cpp
+    src/machines/ebcdic.cpp
     src/devices/tape_drive.cpp
     src/devices/card_deck.cpp
     src/devices/line_printer.cpp
+    src/devices/channel.cpp
     src/runtime_config.cpp
     src/cpu/system360_cpu.cpp
     src/cpu/ibm1401_cpu.cpp
