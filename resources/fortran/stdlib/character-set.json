@@ -1,0 +1,7 @@
+{
+  "source_form": "fixed-form",
+  "columns": {"label": [1,5], "continuation": 6, "statement": [7,72], "sequence": [73,80]},
+  "case_insensitive_identifiers": true,
+  "default_typing": "not yet implemented in semantic analysis",
+  "note": "Project profile only; exact lexical and character rules vary by historical compiler and source encoding."
+}
