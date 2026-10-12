@@ -1,15 +1,16 @@
-# IBM 1401 / IBM 729 and System/360 / IBM 2400 Virtual Hardware Lab
+# IBM Legacy Virtual Hardware Lab
 
-An independent C++23 research and educational codebase for experimenting with early IBM business-computing hardware families.
+Independent C++23 research and educational codebase for IBM 1401 / IBM 729 and IBM System/360 / IBM 2400-family virtual hardware.
 
-## Hardware families
-- **IBM 1401:** character-addressed memory and word-mark representation, a preliminary CPU interface, and card/printer utilities.
-- **IBM 729:** virtual tape-image format, record/tape-mark navigation, and named drive configuration profiles.
-- **IBM System/360:** byte-addressed storage, general registers, a small RR instruction subset, opcode metadata, and an educational channel-command queue.
-- **IBM 2400 family:** named 2400-family tape unit/control-unit profiles using the generic virtual tape backend.
-- **FORTRAN subset tooling:** experimental fixed-form source reader/translator with illustrative assembly listing output.
+## Current modules
+- IBM 1401 character storage and preliminary CPU interface.
+- IBM 729 and IBM 2400-family named tape profiles over a generic virtual tape image.
+- System/360 byte storage, GPRs, a small RR instruction subset, ALU helpers, decoder metadata, and channel queue.
+- Virtual card deck, IBM 1402 reader, IBM 1403 printer wrapper, IBM 2540 reader/punch wrapper, and device bus.
+- Hex and binary byte loaders, EBCDIC invariant-character helpers, trace logger, fixed-form FORTRAN reader/prototype translator.
+- Experimental RR assembler command `ibm-as`.
 
-## Build
+## Build and test
 Requires CMake 3.25+ and a C++23 compiler.
 
 ```sh
@@ -18,16 +19,17 @@ cmake --build build
 ctest --test-dir build --output-on-failure
 ```
 
-## Commands
+## Examples
 ```sh
 ./build/ibm-legacy --help
 ./build/ibm-legacy memory-demo
 ./build/ibm-legacy tape-demo demo.vmt
 ./build/ibm-legacy inspect-tape demo.vmt
-./build/ibm-fortran --emit-c examples/system360/fortran/arithmetic.f arithmetic.cpp
+./build/ibm-fortran --help
+./build/ibm-as examples/system360/rr_subset.asm rr_subset.bin
 ```
 
-## Compatibility status
-This is not a complete, bit-compatible emulator and does not contain IBM's original source code. IBM 1401 instruction execution is not implemented. System/360 CPU support currently recognizes only a small RR instruction subset. The named 729/2400 profiles are configuration presets rather than cycle-accurate physical device simulations. FORTRAN translation and generated assembly remain experimental.
+## Compatibility and verification status
+This is not a complete or bit-compatible emulator and does not include IBM's original source code. The IBM 1401 instruction decoder remains unimplemented. System/360 execution covers only a small educational RR subset. The 729/2400 profiles are configuration scaffolds rather than cycle-accurate device simulations. The FORTRAN translator and assembler are limited prototypes. See `docs/DEVELOPMENT_STATUS.md`, `docs/MODEL_MATRIX.md`, `docs/ROADMAP.md`, and `docs/RESEARCH_SOURCES.md`.
 
-Read `docs/MODEL_MATRIX.md`, `docs/IBM1401_729.md`, `docs/SYSTEM360_2400.md`, `docs/ARCHITECTURE.md`, and `docs/RESEARCH_SOURCES.md` before extending the emulator.
+Do not consider a commit verified until the build, CTest suite, and CI workflow have been run successfully.
