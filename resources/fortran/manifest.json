@@ -1,0 +1,13 @@
+{
+  "resource_version": 1,
+  "library_version": "0.2.0",
+  "dialect_profile": "dialect-profile.json",
+  "intrinsics": "intrinsics.json",
+  "keywords": "keywords.json",
+  "format_descriptors": "format-descriptors.json",
+  "runtime": "stdlib/runtime-functions.json",
+  "character_set": "stdlib/character-set.json",
+  "examples": ["examples/hello.f", "examples/arithmetic.f", "examples/array_sum.f"],
+  "include_files": ["include/constants.inc"],
+  "status": "partial educational FORTRAN IV-style resource pack"
+}
