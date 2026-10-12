@@ -1,0 +1,8 @@
+{
+  "device_family": "IBM 729",
+  "model_profile": "Model II illustrative",
+  "record_backend": "virtual-tape-image",
+  "density_profile_cpi": 200,
+  "write_protected": false,
+  "limitations": ["No tape-motion timing", "No parity simulation", "No physical transport interface"]
+}
