@@ -1,0 +1,9 @@
+{
+  "name": "IBM System/360 FORTRAN IV educational subset",
+  "source_form": "fixed",
+  "statement_columns": {"label": "1-5", "continuation": "6", "statement": "7-72", "sequence": "73-80"},
+  "supported_frontend": ["fixed-form source reading", "basic declarations", "simple assignments", "limited PRINT translation"],
+  "planned": ["DO", "arithmetic IF", "computed GO TO", "FORMAT", "READ/WRITE", "CALL", "FUNCTION", "SUBROUTINE", "COMMON", "EQUIVALENCE", "DATA"],
+  "object_output": false,
+  "historical_compatibility_claim": false
+}
