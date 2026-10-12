@@ -1,0 +1,5 @@
+{
+  "implemented_helpers": ["ABS", "INT", "NINT", "REAL", "DBLE", "SQRT", "EXP", "LOG", "SIN", "COS", "TAN", "MAX", "MIN", "MOD", "DABS", "DSQRT", "DEXP", "DLOG", "DSIN", "DCOS", "DATAN", "DMOD"],
+  "planned_runtime_services": ["OPEN", "CLOSE", "REWIND", "BACKSPACE", "ENDFILE", "formatted READ", "formatted WRITE", "unformatted READ", "unformatted WRITE", "STOP status", "error recovery"],
+  "status": "partial educational library"
+}
