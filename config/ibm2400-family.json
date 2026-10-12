@@ -1,0 +1,7 @@
+{
+  "device_family": "IBM 2400 family",
+  "model_profiles": ["IBM 2401", "IBM 2402", "IBM 2403", "IBM 2404"],
+  "record_backend": "virtual-tape-image",
+  "default_density_profile_cpi": 800,
+  "limitations": ["Named profiles are not cycle-accurate models", "No channel-program or sense-byte implementation"]
+}
