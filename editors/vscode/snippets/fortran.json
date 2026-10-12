@@ -1,0 +1,58 @@
+{
+  "FORTRAN program skeleton": {
+    "prefix": "program",
+    "body": [
+      "      PROGRAM ${1:NAME}",
+      "      ${2:INTEGER I}",
+      "      ${3:I = 0}",
+      "      PRINT *, ${4:I}",
+      "      STOP",
+      "      END"
+    ],
+    "description": "Fixed-form FORTRAN main program skeleton"
+  },
+  "Integer declaration": {
+    "prefix": "integer",
+    "body": [
+      "      INTEGER ${1:A},${2:B}"
+    ],
+    "description": "INTEGER declaration"
+  },
+  "Real declaration": {
+    "prefix": "real",
+    "body": [
+      "      REAL ${1:X}"
+    ],
+    "description": "REAL declaration"
+  },
+  "PRINT list": {
+    "prefix": "print",
+    "body": [
+      "      PRINT *, ${1:VALUE}"
+    ],
+    "description": "List-directed PRINT statement"
+  },
+  "FORMAT statement": {
+    "prefix": "format",
+    "body": [
+      "      FORMAT(${1:I5,F8.2})"
+    ],
+    "description": "FORMAT specification"
+  },
+  "DO loop": {
+    "prefix": "do",
+    "body": [
+      "      DO ${1:10} ${2:I} = ${3:1}, ${4:N}",
+      "      ${5:CONTINUE}",
+      "  ${1:10} CONTINUE"
+    ],
+    "description": "Counted DO loop"
+  },
+  "Arithmetic IF": {
+    "prefix": "if",
+    "body": [
+      "      IF (${1:EXPR}) ${2:10}, ${3:20}, ${4:30}"
+    ],
+    "description": "Arithmetic IF statement"
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "IBM Legacy FORTRAN",
+  "scopeName": "source.fortran.ibmlegacy",
+  "fileTypes": [
+    "f",
+    "for",
+    "ftn",
+    "f77"
+  ],
+  "patterns": [
+    {
+      "include": "#comment"
+    },
+    {
+      "include": "#label"
+    },
+    {
+      "include": "#string"
+    },
+    {
+      "include": "#number"
+    },
+    {
+      "include": "#format"
+    },
+    {
+      "include": "#types"
+    },
+    {
+      "include": "#statements"
+    },
+    {
+      "include": "#intrinsics"
+    }
+  ],
+  "repository": {
+    "comment": {
+      "match": "^([Cc*!].*)$",
+      "name": "comment.line.fortran.ibmlegacy"
+    },
+    "label": {
+      "match": "^([ 0-9]{5})(?=[^ 0Cc*!])",
+      "captures": {
+        "1": {
+          "name": "constant.numeric.label.fortran.ibmlegacy"
+        }
+      }
+    },
+    "format": {
+      "match": "(?i)\\b(FORMAT)\\b\\s*(\\([^)]*\\))",
+      "captures": {
+        "1": {
+          "name": "keyword.control.format.fortran.ibmlegacy"
+        },
+        "2": {
+          "name": "string.quoted.other.format.fortran.ibmlegacy"
+        }
+      }
+    },
+    "types": {
+      "match": "(?i)\\b(INTEGER|REAL|DOUBLE\\s+PRECISION|LOGICAL|COMPLEX|CHARACTER|DIMENSION|COMMON|EQUIVALENCE|EXTERNAL|INTRINSIC|PARAMETER|DATA|IMPLICIT)\\b",
+      "name": "storage.type.fortran.ibmlegacy"
+    },
+    "statements": {
+      "match": "(?i)\\b(PROGRAM|END|STOP|PAUSE|CONTINUE|RETURN|CALL|SUBROUTINE|FUNCTION|DO|IF|THEN|ELSE|GO\\s+TO|GOTO|ASSIGN|READ|WRITE|PRINT|REWIND|BACKSPACE|ENDFILE)\\b",
+      "name": "keyword.control.fortran.ibmlegacy"
+    },
+    "intrinsics": {
+      "match": "(?i)\\b(ABS|SQRT|EXP|LOG|LOG10|SIN|COS|TAN|ATAN|ASIN|ACOS|INT|IFIX|FLOAT|SIGN|MOD|AMOD|MIN|MAX|AMIN1|AMAX1)\\b",
+      "name": "support.function.intrinsic.fortran.ibmlegacy"
+    },
+    "string": {
+      "match": "'([^']|'')*'|\"([^\"]|\"\")*\"",
+      "name": "string.quoted.fortran.ibmlegacy"
+    },
+    "number": {
+      "match": "\\b\\d+(\\.\\d*)?([eEdD][+-]?\\d+)?\\b",
+      "name": "constant.numeric.fortran.ibmlegacy"
+    }
+  }
+}

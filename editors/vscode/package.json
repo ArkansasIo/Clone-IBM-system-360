@@ -1,0 +1,78 @@
+{
+  "name": "ibm-legacy-fortran",
+  "displayName": "IBM Legacy FORTRAN",
+  "description": "Editor support for the IBM Legacy Virtual Hardware Lab fixed-form FORTRAN subset.",
+  "version": "0.1.0",
+  "publisher": "ibm-legacy-lab",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.70.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Linters"
+  ],
+  "main": "./extension.js",
+  "activationEvents": [
+    "onLanguage:fortran-ibmlegacy"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "fortran-ibmlegacy",
+        "aliases": [
+          "IBM Legacy FORTRAN",
+          "fortran-ibmlegacy"
+        ],
+        "extensions": [
+          ".f",
+          ".for",
+          ".ftn",
+          ".f77"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "fortran-ibmlegacy",
+        "scopeName": "source.fortran.ibmlegacy",
+        "path": "./syntaxes/fortran-fixed.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "fortran-ibmlegacy",
+        "path": "./snippets/fortran.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "ibmLegacyFortran.analyzeFile",
+        "title": "IBM FORTRAN: Analyze current file"
+      },
+      {
+        "command": "ibmLegacyFortran.runFile",
+        "title": "IBM FORTRAN: Run current file"
+      }
+    ],
+    "configuration": {
+      "title": "IBM Legacy FORTRAN",
+      "properties": {
+        "ibmLegacyFortran.toolPath": {
+          "type": "string",
+          "default": "ibm-fortran-tool",
+          "description": "Path to the ibm-fortran-tool analyzer executable."
+        },
+        "ibmLegacyFortran.runnerPath": {
+          "type": "string",
+          "default": "ibm-fortran-app",
+          "description": "Path to the ibm-fortran-app runner executable."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "package": "npx @vscode/vsce package"
+  }
+}

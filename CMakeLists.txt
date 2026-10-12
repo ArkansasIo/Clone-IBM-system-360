@@ -44,6 +44,8 @@ add_library(ibmfortran STATIC
     src/fortran/expression.cpp
     src/fortran/array.cpp
     src/fortran/parser.cpp
+    src/fortran/app.cpp
+    src/fortran/tool.cpp
 )
 add_library(ibmlegacy::fortran ALIAS ibmfortran)
 target_include_directories(ibmfortran PUBLIC include)
@@ -63,6 +65,10 @@ add_executable(ibm-fortran src/fortran_main.cpp)
 target_link_libraries(ibm-fortran PRIVATE ibmfortran)
 add_executable(ibm-as src/assembler_main.cpp)
 target_link_libraries(ibm-as PRIVATE ibmlegacy)
+add_executable(ibm-fortran-app src/fortran_app_main.cpp)
+target_link_libraries(ibm-fortran-app PRIVATE ibmfortran)
+add_executable(ibm-fortran-tool src/fortran_tool_main.cpp)
+target_link_libraries(ibm-fortran-tool PRIVATE ibmfortran)
 include(CTest)
 if(BUILD_TESTING)
   add_executable(ibmlegacy-tests tests/test_main.cpp)
@@ -73,6 +79,7 @@ endif()
 include(GNUInstallDirs)
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/resources/fortran DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/resources)
 install(TARGETS ibmlegacy ibmfortran ibm-legacy ibm-fortran ibm-as
+                ibm-fortran-app ibm-fortran-tool
         ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
 install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})

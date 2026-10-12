@@ -1,0 +1,28 @@
+%YAML 1.2
+---
+name: FORTRAN (IBM Legacy fixed form)
+file_extensions:
+  - f
+  - for
+  - ftn
+  - f77
+scope: source.fortran.ibmlegacy
+contexts:
+  main:
+    - match: '^[Cc*!].*$'
+      scope: comment.line.fortran.ibmlegacy
+    - match: '^([ 0-9]{5})(?=[^ 0Cc*!])'
+      captures:
+        1: constant.numeric.label.fortran.ibmlegacy
+    - match: '(?i)\b(INTEGER|REAL|DOUBLE\s+PRECISION|LOGICAL|COMPLEX|CHARACTER|DIMENSION|COMMON|EQUIVALENCE|EXTERNAL|INTRINSIC|PARAMETER|DATA)\b'
+      scope: storage.type.fortran.ibmlegacy
+    - match: '(?i)\b(PROGRAM|END|STOP|CONTINUE|RETURN|CALL|SUBROUTINE|FUNCTION|DO|IF|THEN|ELSE|GOTO|GO\s+TO|READ|WRITE|PRINT|FORMAT)\b'
+      scope: keyword.control.fortran.ibmlegacy
+    - match: '(?i)\b(ABS|SQRT|EXP|LOG|SIN|COS|TAN|INT|FLOAT|SIGN|MOD|MIN|MAX)\b'
+      scope: support.function.intrinsic.fortran.ibmlegacy
+    - match: "'([^']|'')*'"
+      scope: string.quoted.fortran.ibmlegacy
+    - match: '"([^"]|"")*"'
+      scope: string.quoted.fortran.ibmlegacy
+    - match: '\b\d+(\.\d*)?([eEdD][+-]?\d+)?\b'
+      scope: constant.numeric.fortran.ibmlegacy
