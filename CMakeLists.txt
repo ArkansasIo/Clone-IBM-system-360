@@ -42,6 +42,7 @@ add_library(ibmfortran STATIC
     src/fortran/runtime_math.cpp
     src/fortran/format_descriptor.cpp
     src/fortran/expression.cpp
+    src/fortran/array.cpp
 )
 add_library(ibmlegacy::fortran ALIAS ibmfortran)
 target_include_directories(ibmfortran PUBLIC include)
@@ -67,3 +68,11 @@ if(BUILD_TESTING)
   target_link_libraries(ibmlegacy-tests PRIVATE ibmlegacy ibmfortran)
   add_test(NAME ibmlegacy-tests COMMAND ibmlegacy-tests)
 endif()
+
+include(GNUInstallDirs)
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/resources/fortran DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/resources)
+install(TARGETS ibmlegacy ibmfortran ibm-legacy ibm-fortran ibm-as
+        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+install(DIRECTORY resources/fortran DESTINATION ${CMAKE_INSTALL_DATADIR}/ibmlegacy)
