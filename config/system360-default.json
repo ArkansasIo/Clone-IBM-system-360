@@ -1,0 +1,11 @@
+{
+  "machine": "IBM System/360",
+  "model_profile": "baseline-subset",
+  "storage_bytes": 65536,
+  "devices": [
+    {"type": "tape", "family": "IBM 2400", "tracks": 9, "model": "select-explicitly"},
+    {"type": "card_reader_punch"},
+    {"type": "line_printer"}
+  ],
+  "note": "Choose a specific model and device before claiming compatibility."
+}
