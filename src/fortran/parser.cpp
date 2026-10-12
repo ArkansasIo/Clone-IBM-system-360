@@ -2,6 +2,7 @@
 #include "ibmlegacy/fortran/source_reader.hpp"
 #include <algorithm>
 #include <cctype>
+#include <utility>
 namespace ibmlegacy::fortran {
 namespace {
 std::string trim(std::string s){auto p=[](unsigned char c){return !std::isspace(c);};s.erase(s.begin(),std::find_if(s.begin(),s.end(),p));s.erase(std::find_if(s.rbegin(),s.rend(),p).base(),s.end());return s;}
