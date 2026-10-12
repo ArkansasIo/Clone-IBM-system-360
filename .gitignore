@@ -1,0 +1,7 @@
+build/
+cmake-build-*/
+*.vmt
+*.tap
+*.obj
+*.deck
+.DS_Store
