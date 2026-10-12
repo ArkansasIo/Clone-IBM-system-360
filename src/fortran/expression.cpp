@@ -15,9 +15,9 @@ private:
  void space(){while(pos_<s_.size()&&std::isspace(static_cast<unsigned char>(s_[pos_])))++pos_;}
  bool take(char c){space();if(pos_<s_.size()&&s_[pos_]==c){++pos_;return true;}return false;}
  double expr(){double x=term();for(;;){if(take('+'))x+=term();else if(take('-'))x-=term();else return x;}}
- double term(){double x=power();for(;;){if(take('*'))x*=power();else if(take('/')){double y=power();if(y==0)throw std::string("Division by zero");x/=y;}else return x;}}
- double power(){double x=unary();if(take('*')){if(!take('*'))throw std::string("Expected ** exponent operator");x=std::pow(x,power());}return x;}
- double unary(){if(take('+'))return unary();if(take('-'))return -unary();return atom();}
+ double term(){double x=unary();for(;;){if(take('*'))x*=unary();else if(take('/')){double y=unary();if(y==0)throw std::string("Division by zero");x/=y;}else return x;}}
+ double unary(){if(take('+'))return unary();if(take('-'))return -unary();return power();}
+ double power(){double x=atom();space();if(pos_+1<s_.size()&&s_[pos_]=='*'&&s_[pos_+1]=='*'){pos_+=2;x=std::pow(x,unary());}return x;}
  double atom(){space();if(take('(')){double x=expr();if(!take(')'))throw std::string("Missing closing parenthesis");return x;}
   if(pos_>=s_.size())throw std::string("Expected expression value");
   if(std::isdigit(static_cast<unsigned char>(s_[pos_]))||s_[pos_]=='.'){const char*begin=s_.c_str()+pos_;char*end=nullptr;double x=std::strtod(begin,&end);if(end==begin)throw std::string("Invalid numeric literal");pos_=static_cast<std::size_t>(end-s_.c_str());if(pos_<s_.size()&&(s_[pos_]=='D'||s_[pos_]=='d')){++pos_;}return x;}
