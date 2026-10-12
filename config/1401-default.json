@@ -1,0 +1,10 @@
+{
+  "machine": "IBM 1401",
+  "storage_characters": 4000,
+  "devices": [
+    {"type": "tape", "family": "IBM 729", "model": "select-explicitly"},
+    {"type": "card_reader_punch", "family": "IBM 1402"},
+    {"type": "line_printer", "family": "IBM 1403"}
+  ],
+  "note": "Descriptive example configuration; historical options vary."
+}
