@@ -29,6 +29,10 @@ ctest --test-dir build --output-on-failure
 ./build/ibm-as examples/system360/rr_subset.asm rr_subset.bin
 ```
 
+## FORTRAN library
+
+A reusable static library target, `ibmfortran`, is provided (CMake alias `ibmlegacy::fortran`). Its headers include source records, lexer/token types, diagnostics, symbols, arithmetic expression evaluation, initial intrinsic helpers, basic runtime I/O/math, a partial FORMAT descriptor parser, and bounded numeric arrays. Metadata, include files, and examples are under `resources/fortran/`; see `docs/FORTRAN_BUILD.md` and `docs/FORTRAN_LIBRARY.md`.
+
 ## Compatibility and verification status
 This is not a complete or bit-compatible emulator and does not include IBM's original source code. The IBM 1401 instruction decoder remains unimplemented. System/360 execution covers only a small educational RR subset. The 729/2400 profiles are configuration scaffolds rather than cycle-accurate device simulations. The FORTRAN translator and assembler are limited prototypes. See `docs/DEVELOPMENT_STATUS.md`, `docs/MODEL_MATRIX.md`, `docs/ROADMAP.md`, and `docs/RESEARCH_SOURCES.md`.
 
