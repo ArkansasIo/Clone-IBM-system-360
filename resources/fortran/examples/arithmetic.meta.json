@@ -1,0 +1,6 @@
+{
+  "source": "arithmetic.f",
+  "expected_stdout": "arithmetic.expected.txt",
+  "purpose": "integer arithmetic expression and list output",
+  "status": "supported-subset fixture; execute only after translator/build verification"
+}
