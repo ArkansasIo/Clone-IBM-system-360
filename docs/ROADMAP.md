@@ -1,29 +1,34 @@
 # Roadmap
 
-## Foundation completed
-- [x] C++23/CMake skeleton and CI workflow
-- [x] Virtual tape image records, tape marks and navigation
-- [x] 1401 character storage with word-mark representation
-- [x] System/360 byte storage and register model
-- [x] Generic virtual tape drive, card deck and line-printer abstractions
-- [x] Small System/360 RR instruction subset and opcode metadata
-- [x] Educational channel command queue
-- [x] Hex byte loader and EBCDIC invariant-character conversion
-- [x] Named IBM 729 and IBM 2400 family configuration profiles
-- [x] Experimental fixed-form FORTRAN reader/translator
-- [x] Model-specific scope and research documentation
+## Development foundation present
+- [x] C++23/CMake emulator project and CI workflow
+- [x] Virtual tape image and initial IBM 729/2400 profile scaffolding
+- [x] IBM 1401 character storage and word-mark representation
+- [x] System/360 storage, registers and a small RR instruction subset
+- [x] Device abstractions, text card/printer models and channel queue
+- [x] Hex/binary program loading and basic EBCDIC conversion helpers
+- [x] FORTRAN static library target and CLI driver
+- [x] FORTRAN fixed-form source reader, lexer/token model, diagnostics and symbol table
+- [x] Numeric expression evaluator, initial intrinsic helpers and runtime math
+- [x] Basic runtime text I/O, partial FORMAT descriptor parser and bounded 1-D numeric array utility
+- [x] FORTRAN dialect/resource manifests, examples, expected outputs and CI validation scripts
+- [x] Experimental FORTRAN-to-C++ subset emitter and illustrative System/360 listing emitter
 
-## Major implementation work remaining
-- [ ] IBM 1401 instruction decoding, word-mark semantics and decimal arithmetic verified against primary manuals
-- [ ] IBM 1401 BCD character conversion and record/device operations
-- [ ] Broader System/360 instruction set, effective-address calculation, condition-code edge cases and PSW behavior
-- [ ] Program interruptions, external interruptions, I/O interruptions and supervisor state
-- [ ] Channel command chaining, sense data and device status transitions
-- [ ] IBM 729 and IBM 2400 model-specific commands, recording formats and transport timing
-- [ ] Card reader/punch column encoding and printer carriage control
-- [ ] FORTRAN IV FORMAT, I/O, DO loops, labels, subprograms and runtime conventions
-- [ ] Assembler and object-module generation/loader
-- [ ] Integration tests against manuals and a trusted reference emulator
-- [ ] Run and verify all CI builds on Linux, macOS and Windows
+## FORTRAN language implementation remaining
+- [ ] Complete statement parser and semantic/type analysis
+- [ ] FORTRAN implicit typing and declaration/attribute semantics
+- [ ] Array declarations, multidimensional arrays, sections and array expressions
+- [ ] DO loops, statement labels, arithmetic IF, computed GO TO and assigned GO TO
+- [ ] Full FORMAT grammar and formatted/unformatted I/O with unit management
+- [ ] DATA, PARAMETER, COMMON, EQUIVALENCE, EXTERNAL and INTRINSIC semantics
+- [ ] FUNCTION/SUBROUTINE calling conventions, argument passing and RETURN
+- [ ] Historical IBM FORTRAN IV object-module and loader integration
+- [ ] Conformance tests against a selected manual/compiler reference
 
-Named hardware profiles are configuration scaffolds, not claims of cycle-accurate or full historical compatibility.
+## Emulator implementation remaining
+- [ ] Verified IBM 1401 instruction decoder, decimal arithmetic and device operations
+- [ ] Broader System/360 instruction set, addressing, PSW and interruptions
+- [ ] Channel programs, device status/sense and model-specific tape behavior
+- [ ] Build/test verification across supported toolchains and operating systems
+
+Completed foundation items describe code scaffolding and limited subset functionality, not complete historical compatibility.
