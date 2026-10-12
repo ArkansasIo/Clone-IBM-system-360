@@ -1,0 +1,6 @@
+{
+  "language": "FORTRAN IV-style subset",
+  "implemented": ["ABS", "INT", "NINT", "REAL", "DBLE", "SQRT", "EXP", "LOG", "ALOG", "SIN", "COS", "TAN", "MAX", "MIN", "MOD"],
+  "planned": ["AIMAG", "CMPLX", "CONJG", "DIM", "SIGN", "DABS", "DSQRT", "DLOG", "DEXP", "ATAN", "ATAN2"],
+  "note": "Actual type and argument rules depend on the selected FORTRAN dialect and are not fully enforced by this inventory."
+}
