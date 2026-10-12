@@ -14,6 +14,7 @@
 #include "ibmlegacy/devices/tape_models.hpp"
 #include "ibmlegacy/machines/ebcdic.hpp"
 #include "ibmlegacy/runtime/hex_loader.hpp"
+#include "ibmlegacy/runtime/binary_loader.hpp"
 #include "ibmlegacy/runtime/machine_profiles.hpp"
 #include "ibmlegacy/fortran/source_reader.hpp"
 #include "ibmlegacy/runtime/trace_logger.hpp"
@@ -37,7 +38,7 @@ int main(){
  devices::VirtualLinePrinter printer;printer.print_line("hello");assert(printer.output().size()==1);
  devices::VirtualChannel channel;channel.submit({0x02,0,10,0x100});assert(channel.has_pending());assert(channel.next().count==10);channel.complete(devices::ChannelStatus::DeviceEnd,0,"ok");assert(channel.last_result().status==devices::ChannelStatus::DeviceEnd);
  assert(machines::ascii_to_ebcdic('A')==0xC1);assert(machines::ebcdic_to_ascii(0xF5)=='5');assert(machines::ebcdic_bytes_to_ascii(machines::ascii_to_ebcdic_bytes("A9"))=="A9");
- auto hexfile=std::filesystem::temp_directory_path()/"ibm360-test.hex";{std::ofstream hf(hexfile);hf<<"18 12 1A 12\n";}machines::System360Storage loaded(32);auto load=runtime::load_hex_program(loaded,hexfile);assert(load.success&&load.bytes_loaded==4);assert(loaded.read_byte(0)==0x18);std::filesystem::remove(hexfile);
+ auto hexfile=std::filesystem::temp_directory_path()/"ibm360-test.hex";{std::ofstream hf(hexfile);hf<<"18 12 1A 12\n";}machines::System360Storage loaded(32);auto load=runtime::load_hex_program(loaded,hexfile);assert(load.success&&load.bytes_loaded==4);assert(loaded.read_byte(0)==0x18);std::filesystem::remove(hexfile);auto binfile=std::filesystem::temp_directory_path()/"ibm360-test.bin";{std::ofstream bf(binfile,std::ios::binary);bf.put(static_cast<char>(0x18));bf.put(static_cast<char>(0x12));}machines::System360Storage binaryStorage(16);auto binLoad=runtime::load_binary_program(binaryStorage,binfile);assert(binLoad.success&&binLoad.bytes_loaded==2&&binaryStorage.read_byte(1)==0x12);std::filesystem::remove(binfile);
  auto t729=devices::ibm729_model_ii_profile();assert(t729.model.find("729")!=std::string::npos);auto t2400=devices::ibm2401_profile();assert(t2400.model.find("2401")!=std::string::npos);auto p1401=runtime::ibm1401_4k_profile();assert(p1401.storage_size==4000);auto p360=runtime::system360_model30_profile();assert(p360.kind==runtime::MachineKind::System360);assert(machines::ibm1401_opcode_reference[0].mnemonic=="A");
  auto add=cpu::add32(1,2);assert(add.value==3&&add.condition_code==2&&!add.overflow);auto dec=cpu::decode_rr(0x18,0x12);assert(dec.info&&dec.r1==1&&dec.r2==2);
  auto asmline=assembler::parse_assembler_line("LOOP LR R1,R2",1);assert(asmline.success&&asmline.line.label=="LOOP"&&asmline.line.mnemonic=="LR");auto enc=assembler::encode_rr_subset(asmline.line);assert(enc.success&&enc.bytes.size()==2&&enc.bytes[0]==0x18);
