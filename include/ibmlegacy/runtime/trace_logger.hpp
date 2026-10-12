@@ -1,7 +1,7 @@
 #pragma once
 #include <filesystem>
 #include <fstream>
-#include <string>
+#include <string_view>
 namespace ibmlegacy::runtime {
 class TraceLogger {
 public:
