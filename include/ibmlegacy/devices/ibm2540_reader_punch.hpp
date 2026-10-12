@@ -1,6 +1,7 @@
 #pragma once
 #include "ibmlegacy/devices/card_deck.hpp"
 #include "ibmlegacy/devices/device.hpp"
+#include <cstddef>
 #include <optional>
 #include <string>
 namespace ibmlegacy::devices {
