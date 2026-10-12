@@ -13,6 +13,9 @@ REQUIRED = {
     "dialect-profile.json": {"name", "source_form", "statement_columns", "supported_frontend", "planned", "object_output"},
     "stdlib/runtime-functions.json": {"implemented_helpers", "planned_runtime_services", "status"},
     "stdlib/character-set.json": {"source_form", "columns", "case_insensitive_identifiers", "note"},
+    "manifest.json": {"resource_version", "library_version", "dialect_profile", "intrinsics", "keywords", "format_descriptors", "runtime", "examples", "include_files", "status"},
+    "examples/hello.meta.json": {"source", "expected_stdout", "purpose", "status"},
+    "examples/arithmetic.meta.json": {"source", "expected_stdout", "purpose", "status"},
 }
 
 def main() -> int:
