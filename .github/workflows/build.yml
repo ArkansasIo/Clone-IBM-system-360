@@ -17,5 +17,7 @@ jobs:
         run: cmake --build build --parallel 2
       - name: Validate FORTRAN resources
         run: python3 scripts/validate_fortran_resources.py
+      - name: Run FORTRAN example programs
+        run: python3 scripts/test_fortran_examples.py --compiler build/ibm-fortran --cxx c++
       - name: Test
         run: ctest --test-dir build --output-on-failure
