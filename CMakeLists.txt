@@ -26,7 +26,14 @@ add_library(ibmlegacy
     src/cpu/system360_decoder.cpp
     src/trace_logger.cpp
     src/cpu/ibm1401_cpu.cpp
+    src/assembler/lexer.cpp
+    src/assembler/encoder.cpp
+)
+target_include_directories(ibmlegacy PUBLIC include)
+
+add_library(ibmfortran STATIC
     src/fortran/fortran_compiler.cpp
+    src/fortran/source_reader.cpp
     src/fortran/diagnostic.cpp
     src/fortran/lexer.cpp
     src/fortran/symbol_table.cpp
@@ -35,11 +42,14 @@ add_library(ibmlegacy
     src/fortran/runtime_math.cpp
     src/fortran/format_descriptor.cpp
     src/fortran/expression.cpp
-    src/fortran/source_reader.cpp
-    src/assembler/lexer.cpp
-    src/assembler/encoder.cpp
 )
-target_include_directories(ibmlegacy PUBLIC include)
+add_library(ibmlegacy::fortran ALIAS ibmfortran)
+target_include_directories(ibmfortran PUBLIC include)
+if(MSVC)
+  target_compile_options(ibmfortran PRIVATE /W4 /permissive-)
+else()
+  target_compile_options(ibmfortran PRIVATE -Wall -Wextra -Wpedantic -Wconversion)
+endif()
 if(MSVC)
   target_compile_options(ibmlegacy PRIVATE /W4 /permissive-)
 else()
@@ -48,12 +58,12 @@ endif()
 add_executable(ibm-legacy src/main.cpp)
 target_link_libraries(ibm-legacy PRIVATE ibmlegacy)
 add_executable(ibm-fortran src/fortran_main.cpp)
-target_link_libraries(ibm-fortran PRIVATE ibmlegacy)
+target_link_libraries(ibm-fortran PRIVATE ibmfortran)
 add_executable(ibm-as src/assembler_main.cpp)
 target_link_libraries(ibm-as PRIVATE ibmlegacy)
 include(CTest)
 if(BUILD_TESTING)
   add_executable(ibmlegacy-tests tests/test_main.cpp)
-  target_link_libraries(ibmlegacy-tests PRIVATE ibmlegacy)
+  target_link_libraries(ibmlegacy-tests PRIVATE ibmlegacy ibmfortran)
   add_test(NAME ibmlegacy-tests COMMAND ibmlegacy-tests)
 endif()
