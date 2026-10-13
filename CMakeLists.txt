@@ -3,6 +3,12 @@ project(IBM_Legacy_Virtual_Hardware VERSION 0.1.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
+
+# Place all built executables in <project>/bin (multi-config generators such as
+# Visual Studio append the configuration, e.g. bin/Debug and bin/Release).
+set(IBMLEGACY_EXE_OUTPUT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/bin" CACHE PATH "Output folder for built executables")
+file(MAKE_DIRECTORY "${IBMLEGACY_EXE_OUTPUT_DIR}")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${IBMLEGACY_EXE_OUTPUT_DIR}")
 add_library(ibmlegacy
     src/tape/tape_image.cpp
     src/machines/ibm1401.cpp

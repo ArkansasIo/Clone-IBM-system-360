@@ -27,8 +27,8 @@ Settings:
 
 To use the extension from source, open `editors/vscode` in VS Code and press `F5`
 to launch an Extension Development Host. Point `toolPath`/`runnerPath` at the
-built executables (for example `build/Debug/ibm-fortran-tool.exe`), or add the
-build directory to `PATH`.
+built executables (for example `bin/Debug/ibm-fortran-tool.exe`), or add the
+`bin` directory to `PATH`.
 
 ## Vim
 Copy `vim/fortran-ibmlegacy.vim` to `~/.vim/syntax/` and register the file type:

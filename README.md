@@ -25,14 +25,18 @@ ctest --test-dir build -C Debug --output-on-failure
 > `cmake --build` and `-C Debug` to `ctest`.
 
 ## Examples
+All executables are written to the `bin/` folder at the project root
+(`bin/Debug` / `bin/Release` with multi-config generators such as Visual Studio).
+Override with `-DIBMLEGACY_EXE_OUTPUT_DIR=<path>` when configuring.
+
 ```sh
-./build/Debug/ibm-legacy --help
-./build/Debug/ibm-legacy memory-demo
-./build/Debug/ibm-legacy tape-demo demo.vmt
-./build/Debug/ibm-legacy inspect-tape demo.vmt
-./build/Debug/ibm-fortran --help
-./build/Debug/ibm-fortran-tool resources/fortran/examples/hello.f --json
-./build/Debug/ibm-as examples/system360/rr_subset.asm rr_subset.bin
+./bin/Debug/ibm-legacy --help
+./bin/Debug/ibm-legacy memory-demo
+./bin/Debug/ibm-legacy tape-demo demo.vmt
+./bin/Debug/ibm-legacy inspect-tape demo.vmt
+./bin/Debug/ibm-fortran --help
+./bin/Debug/ibm-fortran-tool resources/fortran/examples/hello.f --json
+./bin/Debug/ibm-as examples/system360/rr_subset.asm rr_subset.bin
 ```
 
 ## Tests and CI
