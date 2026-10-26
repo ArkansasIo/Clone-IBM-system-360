@@ -1,0 +1,6 @@
+BasedOnStyle: LLVM
+Language: Cpp
+Standard: c++23
+IndentWidth: 2
+ColumnLimit: 120
+SortIncludes: true
