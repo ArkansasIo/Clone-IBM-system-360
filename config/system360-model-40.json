@@ -1,0 +1,15 @@
+{
+  "model": "System/360 Model 40 educational profile",
+  "addressing": "24-bit",
+  "memory_bytes": 262144,
+  "cpu": { "general_registers": 16, "word_bits": 32, "psw_bits": 64 },
+  "devices": {
+    "channels": [
+      { "address": "0x09", "type": "console" },
+      { "address": "0x0C", "type": "card_reader" },
+      { "address": "0x0E", "type": "line_printer" },
+      { "address": "0x0A", "type": "tape" }
+    ]
+  },
+  "trace": { "enabled": true, "level": "instruction" }
+}
