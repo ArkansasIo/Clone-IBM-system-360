@@ -9,17 +9,17 @@ std::uint8_t compare32(std::uint32_t a,std::uint32_t b) noexcept {
  const auto sa=static_cast<std::int32_t>(a), sb=static_cast<std::int32_t>(b);
  return sa<sb?1U:(sa>sb?2U:0U);
 }
-std::uint8_t compare_unsigned32(std::uint32_t a,std::uint32_t b) noexcept {
- return a<b?1U:(a>b?2U:0U);
-}
+std::uint8_t compare_unsigned32(std::uint32_t a,std::uint32_t b) noexcept { return a<b?1U:(a>b?2U:0U); }
 std::uint32_t effective_address(const DecodedInstruction& d,const machines::System360Registers& r) noexcept {
  const std::uint32_t base=d.b2==0?0U:r.general[d.b2];
  const std::uint32_t index=d.x2==0?0U:r.general[d.x2];
  return base+index+d.displacement;
 }
-bool branch_selected(std::uint8_t mask,std::uint8_t cc) noexcept {
- return (mask&(1U<<(3U-cc)))!=0U;
+std::uint16_t read_halfword(const machines::System360Storage& s,std::size_t a) {
+ return static_cast<std::uint16_t>((std::uint16_t(s.read_byte(a))<<8U)|s.read_byte(a+1));
 }
+std::int32_t signed_halfword(const machines::System360Storage& s,std::size_t a) { return static_cast<std::int16_t>(read_halfword(s,a)); }
+bool branch_selected(std::uint8_t mask,std::uint8_t cc) noexcept { return (mask&(1U<<(3U-cc)))!=0U; }
 }
 System360Cpu::System360Cpu(machines::System360Storage&s):storage_(s){}
 machines::System360Registers& System360Cpu::registers()noexcept{return regs_;}
@@ -32,8 +32,7 @@ StepResult System360Cpu::step(){
   const auto* info=find_system360_opcode(first);
   if(!info)return{StepState::IllegalInstruction,first,"Unsupported System/360 opcode"};
   if(info->format=="RR") {
-   const auto second=storage_.read_byte(pc+1);
-   const auto d=decode_rr(first,second);
+   const auto d=decode_rr(first,storage_.read_byte(pc+1));
    const auto r1=d.r1; const auto r2=d.r2;
    regs_.instruction_address+=2U;
    switch(first) {
@@ -54,8 +53,7 @@ StepResult System360Cpu::step(){
    }
   }
   if(info->format=="RX") {
-   const auto second=storage_.read_byte(pc+1), third=storage_.read_byte(pc+2), fourth=storage_.read_byte(pc+3);
-   const auto d=decode_rx(first,second,third,fourth);
+   const auto d=decode_rx(first,storage_.read_byte(pc+1),storage_.read_byte(pc+2),storage_.read_byte(pc+3));
    const auto ea=effective_address(d,regs_);
    regs_.instruction_address+=4U;
    switch(first) {
@@ -64,10 +62,10 @@ StepResult System360Cpu::step(){
     case 0x45: { const auto next=regs_.instruction_address; if(d.r1) regs_.general[d.r1]=next; regs_.instruction_address=ea; return{StepState::Executed,first,"BAL"}; }
     case 0x46: if(--regs_.general[d.r1]!=0U) regs_.instruction_address=ea; return{StepState::Executed,first,"BCT"};
     case 0x47: if(branch_selected(d.r1,regs_.condition_code)) regs_.instruction_address=ea; return{StepState::Executed,first,"BC"};
-    case 0x48: regs_.general[d.r1]=static_cast<std::uint32_t>(static_cast<std::int32_t>(static_cast<std::int16_t>((std::uint16_t(storage_.read_byte(ea))<<8U)|storage_.read_byte(ea+1))))); return{StepState::Executed,first,"LH"};
-    case 0x49: regs_.condition_code=compare32(regs_.general[d.r1],static_cast<std::uint32_t>(static_cast<std::int32_t>(static_cast<std::int16_t>((std::uint16_t(storage_.read_byte(ea))<<8U)|storage_.read_byte(ea+1)))))); return{StepState::Executed,first,"CH"};
-    case 0x4A: regs_.general[d.r1]+=static_cast<std::uint32_t>(static_cast<std::int32_t>(static_cast<std::int16_t>((std::uint16_t(storage_.read_byte(ea))<<8U)|storage_.read_byte(ea+1)))); return{StepState::Executed,first,"AH"};
-    case 0x4B: regs_.general[d.r1]-=static_cast<std::uint32_t>(static_cast<std::int32_t>(static_cast<std::int16_t>((std::uint16_t(storage_.read_byte(ea))<<8U)|storage_.read_byte(ea+1)))); return{StepState::Executed,first,"SH"};
+    case 0x48: regs_.general[d.r1]=static_cast<std::uint32_t>(signed_halfword(storage_,ea)); return{StepState::Executed,first,"LH"};
+    case 0x49: regs_.condition_code=compare32(regs_.general[d.r1],static_cast<std::uint32_t>(signed_halfword(storage_,ea))); return{StepState::Executed,first,"CH"};
+    case 0x4A: regs_.general[d.r1]+=static_cast<std::uint32_t>(signed_halfword(storage_,ea)); return{StepState::Executed,first,"AH"};
+    case 0x4B: regs_.general[d.r1]-=static_cast<std::uint32_t>(signed_halfword(storage_,ea)); return{StepState::Executed,first,"SH"};
     case 0x50: storage_.write_word(ea,regs_.general[d.r1]); return{StepState::Executed,first,"ST"};
     case 0x54: regs_.general[d.r1]&=storage_.read_word(ea); regs_.condition_code=condition_code_logical(regs_.general[d.r1]); return{StepState::Executed,first,"N"};
     case 0x55: regs_.condition_code=compare_unsigned32(regs_.general[d.r1],storage_.read_word(ea)); return{StepState::Executed,first,"CL"};
