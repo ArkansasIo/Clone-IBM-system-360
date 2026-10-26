@@ -80,6 +80,10 @@ if(BUILD_TESTING)
   add_executable(ibmlegacy-tests tests/test_main.cpp)
   target_link_libraries(ibmlegacy-tests PRIVATE ibmlegacy ibmfortran)
   add_test(NAME ibmlegacy-tests COMMAND ibmlegacy-tests)
+
+  add_executable(ibmlegacy-system360-cpu-tests tests/test_system360_cpu_expansion.cpp)
+  target_link_libraries(ibmlegacy-system360-cpu-tests PRIVATE ibmlegacy)
+  add_test(NAME ibmlegacy-system360-cpu-tests COMMAND ibmlegacy-system360-cpu-tests)
 endif()
 
 include(GNUInstallDirs)
